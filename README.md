@@ -1,10 +1,10 @@
 # express-movie-database
 
 **Tools Used are: 
-Node
-Express
-Sequelize 
-SQLite3
+Node, 
+Express, 
+Sequelize,  
+SQLite3,
 Jest**
 
 ![image](https://user-images.githubusercontent.com/15171226/145600308-584e9c61-125d-4a81-95d9-201d195d6538.png)
