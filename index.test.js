@@ -9,13 +9,13 @@ describe('Movie Database', ()=>{
         await sequelize.sync({force:true})
 
         await Movie.bulkCreate([{movie_title: 'Black Panther', release_date: "2018-02-16", budget: 200000000},
-                                 {movie_title: '42', release_date: '04/12/2013', budget: 40000000}])
+                                 {movie_title: '42', release_date: '2013-04-12', budget: 40000000}])
 
-        await Cast.bulkCreate([{cast_realname: 'Chadwick Boseman', cast_moviename: "T'Challa", role: 'Black Panther'},
-        {cast_realname: 'Michael B. Jordan', cast_moviename: "Erik Killmonger", role: 'Black Panther Cousin'}])
+        await Cast.bulkCreate([{cast_realname: 'Chadwick Boseman', cast_moviename: "T'Challa", role: 'Black Panther', movieId:'1'},
+        {cast_realname: 'Michael B. Jordan', cast_moviename: "Erik Killmonger", role: 'Black Panther Cousin', movieId:'1'}])
 
-        await Crew.bulkCreate([{ crew_name: 'Ryan Coogler', role: "Director"},
-                                { crew_name: 'RJoe Robert Cole', role: "Writer"}])
+        await Crew.bulkCreate([{ crew_name: 'Ryan Coogler', role: "Director", movieId:'1'},
+                                { crew_name: 'RJoe Robert Cole', role: "Writer", movieId:'1'}])
     })
 
     test('Has a movie', async() => {
@@ -39,6 +39,7 @@ describe('Movie Database', ()=>{
             expect(testCast.cast_realname).toBe('Chadwick Boseman')
             expect(testCast.cast_moviename).toBe("T'Challa")
             expect(testCast.role).toBe('Black Panther')
+            expect(testCast.movieId).toBe('1')
      
      })
 
@@ -50,6 +51,7 @@ describe('Movie Database', ()=>{
       });
       expect(testCrew.crew_name).toBe('Ryan Coogler')
       expect(testCrew.role).toBe("Director")
+      expect(testCrew.movieId).toBe('1')
 
     })
 

@@ -8,7 +8,8 @@ class Cast extends Model {
 Cast.init({
     cast_realname: DataTypes.STRING,
     cast_moviename: DataTypes.STRING,
-    role: DataTypes.STRING
+    role: DataTypes.STRING,
+    movieId: DataTypes.STRING
 }, {
     sequelize, 
     timestamps: false

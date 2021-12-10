@@ -7,7 +7,8 @@ class Crew extends Model {
 
 Crew.init({
     crew_name: DataTypes.STRING,
-    role: DataTypes.STRING
+    role: DataTypes.STRING,
+    movieId: DataTypes.STRING
 }, {
     sequelize, 
     timestamps: false
