@@ -1,22 +1,28 @@
-const {sequelize, DataTypes, Model} = require('./db')
-const Cast = require('./models/cast')
-const Crew = require('./models/crew')
-const Movie = require('./models/movie')
+//const {sequelize, DataTypes, Model} = require('./db')
+const {Movie, Cast, Crew, sequelize} = require('./index');
 
-describe('Movie Database', ()=>{
-    beforeAll(async()=>{
+// const Cast = require('./models/cast')
+// const Crew = require('./models/crew')
+// const Movie = require('./models/movie')
 
-        await sequelize.sync({force:true})
+describe('Movie Database', ()=> {
+    beforeAll(async()=> {
 
-        await Movie.bulkCreate([{movie_title: 'Black Panther', release_date: "2018-02-16", budget: 200000000},
-                                 {movie_title: '42', release_date: '2013-04-12', budget: 40000000}])
+       await sequelize.sync({force:true})
 
-        await Cast.bulkCreate([{cast_realname: 'Chadwick Boseman', cast_moviename: "T'Challa", role: 'Black Panther', movieId:'1'},
-        {cast_realname: 'Michael B. Jordan', cast_moviename: "Erik Killmonger", role: 'Black Panther Cousin', movieId:'1'}])
+        const arrayOfMovies=[{movie_title: 'Black Panther', release_date: "2018-02-16", budget: 200000000},
+                                 {movie_title: '42', release_date: '2013-04-12', budget: 40000000}]
 
-        await Crew.bulkCreate([{ crew_name: 'Ryan Coogler', role: "Director", movieId:'1'},
-                                { crew_name: 'RJoe Robert Cole', role: "Writer", movieId:'1'}])
-    })
+        const arrayOfCast=[{cast_realname: 'Chadwick Boseman', cast_moviename: "T'Challa", role: 'Black Panther'},
+        {cast_realname: 'Michael B. Jordan', cast_moviename: "Erik Killmonger", role: 'Black Panther Cousin'}]
+
+        const arrayOfCrew=[{ crew_name: 'Ryan Coogler', role: "Director"},
+                          { crew_name: 'RJoe Robert Cole', role: "Writer"}]
+
+        await Movie.bulkCreate(arrayOfMovies)
+        await Cast.bulkCreate(arrayOfCast)
+        await Crew.bulkCreate(arrayOfCrew)
+    });
 
     test('Has a movie', async() => {
              const testMovie = await Movie.findOne({
@@ -56,10 +62,8 @@ describe('Movie Database', ()=>{
     })
 
      afterAll(async()=> {
-         //await sequelize.sync({force:true})
+         
         sequelize.close()
     })
-
-
 
 })
