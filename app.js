@@ -7,6 +7,14 @@ const app = express()
 const port = 3000
 app.use(express.json())
 
+app.get('/movieSite', async(req,res) =>{
+    res.redirect('https://www.marvel.com/movies/black-panther')
+     })
+
+app.get('/download', async(req,res) =>{
+    res.download('public/BlackPanther')
+})
+
 app.get('/movie', async(req,res) => {
     const allMovie = await Movie.findAll()
     res.json(allMovie)
