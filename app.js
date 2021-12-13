@@ -13,7 +13,7 @@ app.get('/movieSite', async(req,res) =>{
      })
 //downloads a picture of the black panthers movie cover
 app.get('/download', async(req,res) =>{
-    res.download('public/BlackPanther')
+    res.download('public/BlackPanther.jfif')
 })
 
 // Getting information about movies
@@ -39,6 +39,8 @@ app.route('/movie/:id')
         const deleted = await Movie.destroy({
             where: {id: req.params.id}
         })
+        console.log(`Request From: ${req.originalUrl}`)
+        console.log(`Request type: ${req.method}`)
         res.send(deleted? "Movie deleted" : "Movie delition failed!")
     })
     .put(async(req,res)=>{
@@ -86,7 +88,7 @@ app.route('/crew')
         let newCrew = await Crew.create(req.body)
         res.send(newCrew? "Crew Created": "Crew create Failed!")
     })
-    .get('/crew', async(req,res) => {
+    .get(async(req,res) => {
     const allCrew = await Crew.findAll()
     res.json(allCrew)
 })
